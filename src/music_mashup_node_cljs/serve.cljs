@@ -30,9 +30,10 @@
 (defn search [mbid]
     (let [channel (chan)]
       (go (let [mb-response (scrape-music-brainz-response (<! (get-music-brainz mbid)))
-                album-responses (<! (into [] (merge (mapv #(get-cover-art (:id %)) (:albums mb-response)))))
-                albums (map scrape-cover-art album-responses)
-                wiki (scrape-wiki (<! (get-wiki (:wikipedia mb-response))))]
+                album-channels (into [] (merge (mapv #(get-cover-art (:id %)) (:albums mb-response))))
+                wiki (scrape-wiki (<! (get-wiki (:wikipedia mb-response))))
+                album-responses (<! album-channels)
+                albums (map scrape-cover-art album-responses)]
             (>! channel { :mb mb-response :albums albums :wiki wiki })
             (close! channel)))
       channel))
