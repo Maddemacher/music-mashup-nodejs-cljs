@@ -6,8 +6,7 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.228"]
-                 [org.clojure/core.async "0.2.374"]
-                 [cljs-http-node "0.1.31-SNAPSHOT"]]
+                 [org.clojure/core.async "0.2.374"]]
 
   :plugins [[lein-cljsbuild "1.1.2"]
             [lein-figwheel "0.5.0-4"]
@@ -18,9 +17,7 @@
   :clean-targets ["server.js"
                   "target"]
 
-    :npm {:dependencies  [[source-map-support "0.2.8"]
-                          [express "4.11.1"]
-                          [util "0.10.3"]
+    :npm {:dependencies  [[express "4.11.1"]
                           [superagent "1.7.2"]]}
 
   :cljsbuild {
@@ -37,7 +34,7 @@
              {:id "prod"
               :source-paths ["src"]
               :compiler {
-                :output-to "server.js"
+                :output-to "target/server_prod/server.js"
                 :output-dir "target/server_prod"
                 :target :nodejs
                 :optimizations :simple}}]})
