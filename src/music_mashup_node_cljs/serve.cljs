@@ -33,7 +33,7 @@
                 album-channels (into [] (merge (mapv #(get-cover-art (:id %)) (:albums mb-response))))
                 wiki (scrape-wiki (<! (get-wiki (:wikipedia mb-response))))
                 album-responses (<! album-channels)
-                albums (map scrape-cover-art album-responses)]
+                albums (remove #(nil? (:image %)) (map scrape-cover-art album-responses))]
             (>! channel { :mb mb-response :albums albums :wiki wiki })
             (close! channel)))
       channel))
