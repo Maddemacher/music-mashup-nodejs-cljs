@@ -12,7 +12,7 @@
 (defn -main []
   (let [app (express)]
     (.get app "/" say-hello!)
-    (.get app "/mbid" mbh/serve-mbid)
+    (.get app "/mbid/:id" mbh/serve-mbid)
     (.listen app 3000 (fn []
                         (println "Server started on port 3000")))))
 

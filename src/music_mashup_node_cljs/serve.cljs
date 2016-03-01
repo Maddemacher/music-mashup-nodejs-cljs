@@ -39,5 +39,5 @@
       channel))
 
 (defn serve-mbid [req res]
-  (go (let [search-response (<! (search (.-id (.-query req))))]
+  (go (let [search-response (<! (search (.-id (.-params req))))]
             (.send res (clj->js search-response)))))
